@@ -48,8 +48,57 @@ Get Array of all the routes or a single route by it's unique ID
         - BusRoute (Route)
         
 
+## Group Rides
+
+Get Array of all the rides or a single route by it's unique ID
+
+The rides can be filtered by two optional parameters. The result will be list of rides
+between start date and end date. Both dates inclusive
+
+## Example
+- /rides?start={date1}&end={date2} would return list of rides between date1 inclusive and date2 exclusive
+- /rides?start={date1} would return list of rides from date1 inclusive till now
+- /rides?start={date}&end={date} would return list of rides on date
+- /rides?end={date} would return all the rides lte date
+
+## GET /rides
+
+
++ Parameters
+  + start: `2016-09-14` (optional, string) - Start date of the date range - yyyy-mm-dd
+  + end: `2016-09-19` (optional, string) - End date of the date range - yyyy-mm-dd
+
+
++ Response 200 (application/json)
+    + Attributes
+        - Ride (array[Ride])
+
+
+## GET /rides/{id}
+
++ Parameters
+  + id: 1 (required, number) - The unique ID of the ride in integer.
+
++ Response 200 (application/json)
+    + Attributes
+        - Ride (Ride)
+        
+
+
 # Data Structures
 
+## Ride (object)
+
+- url: `http://127.0.0.1:8000/rides/6` (string) - Identifier for the resource.
+- route: `http://127.0.0.1:8000/routes/1` (string, required) - The url/identifier of the route the ride will be taking.
+- departure: `2016-09-18T18:40:00Z` (string, required) - The time of departure in UTF.
+- ride_info: `The ride is delayed by 30 minutes` (string, required) - Optional inforamtion about the ride.
+- status (enum[string])
+  - Delayed - The ride will run at the scheduled time. This is the default value
+  - On Time - The ride is delayed. The time of delay can be added to ride_info field.
+  - Cancelled - The ride is cancelled. Furthur communication can be added to ride_info field.
+  
+  
 ## Stop (object)
 
 - url: `http://127.0.0.1:8000/stops/6` (string) - Identifier for the resource.
@@ -65,6 +114,9 @@ Get Array of all the routes or a single route by it's unique ID
 - name: `Vellore to Bangalore` (string, required) - The Name of the route
 - start_stop: `Vellore` (string, required) - The Name of the origin stop.
 - end_stop: `Bangalore` (string, required) - The Name of the destination stop.
-- type: `REGIONALI` (string, required) - The type of the stop.(Regionali, Interrogionali, Urbane)
-- path: `["http://127.0.0.1:8000/stops/1", "http://127.0.0.1:8000/stops/5", "http://127.0.0.1:8000/stops/7"
+- type (enum[string])
+  - Regionali - They haven't finished their public profile or whatever
+  - Interrogionali - Good as gold
+  - Urbane - This place doesn't exist
+- path: ["http://127.0.0.1:8000/stops/1", "http://127.0.0.1:8000/stops/5", "http://127.0.0.1:8000/stops/7"
  The Identifier of all the stops in the route.
