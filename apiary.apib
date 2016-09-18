@@ -1,8 +1,70 @@
 FORMAT: 1A
-# My API
+# IAS
 
-## GET /places
+Documentation for IAS API.
 
-+ Response 200 (text/plain)
+## Group Stops
 
-        Hello World!
+Get Array of all the stops or a single stop by it's unique ID
+
+## GET /stops
+
++ Response 200 (application/json)
+    + Attributes
+        - BusStop (array[Stop])
+
+
+## GET /stops/{id}
+
++ Parameters
+  + id: 1 (required, number) - The unique ID of the stop in integer.
+
++ Response 200 (application/json)
+    + Attributes
+        - BusStop (Stop)
+        
+
+## Group Routes
+
+Get Array of all the routes or a single route by it's unique ID
+
+## GET /routes
+
++ Parameters
+  + origin: 'Vellore' (optional, string) - The name of the origin stop of the route.
+  + destination: 'Hyderabad' (optional, string) - The name of the origin stop of the route.
+
++ Response 200 (application/json)
+    + Attributes
+        - BusRoute (array[Route])
+
+## GET /routes/{id}
+
++ Parameters
+  + id: 1 (required, number) - The unique ID of the route in integer.
+
++ Response 200 (application/json)
+    + Attributes
+        - BusRoute (Route)
+        
+
+# Data Structures
+
+## Stop (object)
+
+- url: `http://127.0.0.1:8000/stops/6` (string) - Identifier for the resource.
+- name: `Bangalore, Marathalli` (string, required) - The Name of the stop.
+- address: `Near Marathalli Bridge, Kadbesanhalli, 490020` (string, required) - The address of the stop.
+- city: `Bangalore` (string, required) - The name of the city where stop resides.
+- location: `12.9591722,77.697419` (string, required) - Lat and Long coordinates of the location.
+- iDisabled: `false` (boolean, required) - The status of the  stop. False means stop is active.
+- stop_info: `The stop is near marathalli bridge` (string, required) - Extra info about the stop.
+
+## Route (object)
+- url: `http://127.0.0.1:8000/routes/1` (string, required) - Identifier for the resource
+- name: `Vellore to Bangalore` (string, required) - The Name of the route
+- start_stop: `Vellore` (string, required) - The Name of the origin stop.
+- end_stop: `Bangalore` (string, required) - The Name of the destination stop.
+- type: `REGIONALI` (string, required) - The type of the stop.(Regionali, Interrogionali, Urbane)
+- path: `["http://127.0.0.1:8000/stops/1", "http://127.0.0.1:8000/stops/5", "http://127.0.0.1:8000/stops/7"
+ The Identifier of all the stops in the route.
