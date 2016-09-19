@@ -3,6 +3,30 @@ FORMAT: 1A
 
 Documentation for IAS API.
 
+## Group Installation
+
+- Install neo4j community edition and start the server.
+    + https://neo4j.com/download/
+- Make a new folder
+    + mkdir IAS
+    + cd IAS
+- Create virtual environment with python 2.7 and activate it
+    + virtualenv venv --distribute
+    + source venv/bin/activate 
+- Clone the repo from the source
+    + git clone https://ratulj@bitbucket.org/jeetlab/ias-backend.git
+- Install dependencies from requirement.txt
+    + pip install -r ias-backend/requirements.txt
+- Create migrations for the project
+    + cd ias-backend
+    + python manage.py migrate
+- Run tests to see if everything is working
+    + python manage.py harvest
+    
+    If the test failed check if neo4j is running?
+
+
+
 ## Group Stops
 
 Get Array of all the stops or a single stop by it's unique ID
