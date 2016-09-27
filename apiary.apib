@@ -7,12 +7,15 @@ Documentation for IAS API.
 
 - Install neo4j community edition and start the server.
     + https://neo4j.com/download/
+    + Install java8 if not already installed.
+    + Open the installed application and start the application on port 7474 by clicking on start server
 - Make a new folder
     + mkdir IAS
     + cd IAS
 - Create virtual environment with python 2.7 and activate it
     + virtualenv venv --distribute
     + source venv/bin/activate 
+    + More info - http://docs.python-guide.org/en/latest/dev/virtualenvs/
 - Clone the repo from the source
     + git clone https://ratulj@bitbucket.org/jeetlab/ias-backend.git
 - Install dependencies from requirement.txt
@@ -22,8 +25,7 @@ Documentation for IAS API.
     + python manage.py migrate
 - Run tests to see if everything is working
     + python manage.py harvest
-    
-    If the test failed check if neo4j is running?
+
 
 
 
@@ -130,7 +132,7 @@ between start date and end date. Both dates inclusive
 - address: `Near Marathalli Bridge, Kadbesanhalli, 490020` (string, required) - The address of the stop.
 - city: `Bangalore` (string, required) - The name of the city where stop resides.
 - location: `12.9591722,77.697419` (string, required) - Lat and Long coordinates of the location.
-- iDisabled: `false` (boolean, required) - The status of the  stop. False means stop is active.
+- isDisabled: `false` (boolean, required) - The status of the  stop. False means stop is active.
 - stop_info: `The stop is near marathalli bridge` (string, required) - Extra info about the stop.
 
 ## Route (object)
