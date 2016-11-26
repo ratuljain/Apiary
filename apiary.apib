@@ -73,6 +73,18 @@ Get Array of all the routes or a single route by it's unique ID
     + Attributes
         - BusRoute (Route)
         
+        
+## GET /routes_coordinates/
+Get Array of all the stops coordinates which are reachable from the origin.
+example http://104.131.44.133/routes_coordinates/?origin=A
+
++ Parameters
+  + origin: Koramangala (required, string) - The name of the origin stop
+
++ Response 200 (application/json)
+    + Attributes
+        - BusRoute (Coordinates)
+        
 
 ## Group Rides
 
@@ -112,6 +124,14 @@ between start date and end date. Both dates inclusive
 
 
 # Data Structures
+
+## Coordinates (object)
+
+- name: `Bangalore, Marathalli` (string, required) - The Name of the stop.
+- address: `Punjabi Bagh, New Delhi, Delhi, India` (string, required) - Address of the stop.
+- coordinates: `12.9591722,77.697419` (string, required) - Lat and Long coordinates of the location.
+- can_reach: `[ "28.65278089999999,77.19214409999995", "28.4594965,77.02663830000006"]` (array, required) - Array of coordinates that are reachable.
+
 
 ## Ride (object)
 
