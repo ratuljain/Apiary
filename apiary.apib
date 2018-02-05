@@ -2,11 +2,13 @@ FORMAT: 1A
  
 # IAS
 
-Documentation for IAS API.
+Documentation for IAS API. 
+
+This API has been used to develop the website (http://iasautolinee.com) and the app available on the Play Store (https://play.google.com/store/apps/details?id=com.iasapp.ias.ias)
 
 ## Group Stops
 
-Get Array of all the stops or a single stop by it's unique ID
+Get Array of all the stops or a single stop by its unique ID
 
 ## GET /stops
 
@@ -22,7 +24,7 @@ Returns List of all the stops. The stops can be filtered against their stop type
 
 ## GET /stops/{id}
 
-Returns a single stop by it's id.
+Returns a single stop by its id.
 
 + Parameters
   + id: 90 (required, number) - The unique ID of the stop in integer.
@@ -64,8 +66,9 @@ Example - `/related-stops/?type=I&origin=70`
 
 ## Group Public Stops
 
-Get Array of all the public stops or a single public stop by it's unique ID
-
+Get Array of all the public stops or a single public stop by its unique ID. The Public Stop Name feature is 
+used to wrap multiple stop e.g. Corigliano Erg, Corigliano Esso under the same stop name for example Corigliano Area Servizio.
+This means that when the user searches using the public stop name Corigliano he will get results for all the stops.
 
 ## GET /stops_pub
 
@@ -99,7 +102,7 @@ Example - `/related-stops-pub/?type=R&origin=Rossano`
 
 ## GET /areas
 
-Returns List of all the stop areas.
+Returns List of all the stop areas for urban stops.
 
 + Response 200 (application/json)
         
@@ -109,16 +112,16 @@ Returns List of all the stop areas.
 
 Get Array of all the routes between an origin and destination on a given date. The
 routes can be optionally filtered out against their type (U, I, R). The origin or destination
-can either be the name of the stop or it's ID.
+can either be the name of the stop or its ID.
 
 ## GET /routes_web
 
-List all rides, direct and indirect between two stops. It takes in the name or id of the actual bus stop as it's parameter.
+List all rides, direct and indirect between two stops. It takes in the name or id of the actual bus stop as its parameter.
  
 + Response 200 (application/json)
 
     + Attributes (object)
-        + Parametersa
+        + Parameters
           + route_type: `I` (required, string) - The name of the type of the route.
           + start: `Acri` (required, string) - The name of the start stop of the route.
           + start_city: `Acri -Piazza Purgatorio` (required, string) - The name of the city of the start stop.
@@ -226,7 +229,8 @@ List all rides, direct and indirect between two stops. It takes in the name or i
 
 ## GET /routes_web_pub
 
-List all rides, direct and indirect between two public stop name. It takes in the name or id of the public stop name rather than the actual stop name.
+List all rides, direct and indirect between two an origin and a destination specified by using their public stop name. It takes in the name or id of the public stop name rather than the actual stop name.
+It will return a list of rides between all the stops associated with those public stop names.
  
 + Response 200 (application/json)
 
